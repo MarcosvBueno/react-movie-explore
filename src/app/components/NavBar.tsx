@@ -36,29 +36,27 @@ function NavBar() {
   return (
     <>
       <nav
-        className={`flex justify-center text-slate-950 fixed top-1/3  rounded-2xl p-5 ml-5 bg-white bg-opacity-20 backdrop-blur-lg transition-opacity transform ${
+        className={`flex justify-center text-slate-950 fixed top-1/3 rounded-2xl p-5 ml-5 bg-white bg-opacity-20 backdrop-blur-lg transition-opacity transform ${
                    show && "opacity-100 translate-x-0"
                  }`}
         onMouseEnter={() => setShow(true)}
         onMouseLeave={() => setShow(false)}
       >
-        <div>
-          <div>
+          <section>
             <ul className="flex flex-col gap-10">
               {navItems.map((item, index) => (
                 <li
                   key={index}
                   className="flex items-center justify-start gap-2  "
                   >
-                       <div className="shadow-xl p-2 rounded-full bg-white/5">
+                       <Link href={item.href} className="shadow-xl p-2 rounded-full bg-white/5">
                         {item.icon}
-                      </div>
+                      </Link>
                   <Link className={`text-white font- transition-opacity duration-300 ease-in-out  ${show ? 'opacity-100' : 'opacity-0'}`} href={item.href}>{show ? item.text : ""}</Link>
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
+          </section>
       </nav>
     </>
   );
