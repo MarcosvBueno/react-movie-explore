@@ -48,19 +48,19 @@ function SearchForm() {
     <>
       <form
         action=""
-        className="flex flex-row items-center gap-3"
+        className="flex flex-row items-center gap-3 w-full justify-center p-2 max-w-md mx-auto"
         onClick={handleSearchForm}
       >
         <input
           type="text"
           placeholder="Search a movie..."
-          className="p-4 px-8 rounded-3xl border-none outline-none items-start min-w-screen"
+          className="p-4 px-8 rounded-3xl border-none outline-none items-start w-full"
           value={searchValue}
           onChange={handleSearchInputChanges}
         />
         <button
           type="submit"
-          className="bg-blue-600  text-white font-bold py-4 min-w-screen px-6 rounded-3xl cursor-pointer  hover:bg-blue-700 hover:scale-105 transition-all duration-300 ease-in-out "
+          className="bg-blue-600  text-white font-bold py-4 max-w-full px-6 rounded-3xl cursor-pointer  hover:bg-blue-700 hover:scale-105 transition-all duration-300 ease-in-out "
         >
           Search
         </button>
