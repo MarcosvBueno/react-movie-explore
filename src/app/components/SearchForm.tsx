@@ -1,12 +1,14 @@
 "use client";
-
 import axios from "axios";
 import { useState } from "react";
 import MovieGrid from "./MovieGrid";
+import Modal from "./Modal";
+import { movieT } from "../types/types";
 
 function SearchForm() {
   const [searchValue, setSearchValue] = useState<string>("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<movieT[]>([]);
+  const [selectedMovie, setSelectedMovie] = useState<movieT | null>(null);
 
   const handleSearchInputChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -15,12 +17,12 @@ function SearchForm() {
   const fetchSearchResults = async (searchValue: string) => {
     const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${
       process.env.NEXT_PUBLIC_API_KEY
-          }&query=${encodeURIComponent(searchValue)}`;
-      
+    }&query=${encodeURIComponent(searchValue)}`;
+
     try {
       const response = await axios.get(searchUrl);
-        setSearchResults(response.data.results);
-        console.log(response.data.results);
+      setSearchResults(response.data.results);
+      console.log(response.data.results);
       return response;
     } catch (error) {
       console.error(error);
@@ -32,6 +34,14 @@ function SearchForm() {
     if (searchValue === "") return;
     fetchSearchResults(searchValue);
     setSearchValue("");
+  };
+
+  const handleMovieClick = (movie: movieT) => {
+    setSelectedMovie(movie);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedMovie(null);
   };
 
   return (
@@ -50,13 +60,17 @@ function SearchForm() {
         />
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 min-w-screen px-6 rounded-3xl cursor-pointer"
+          className="bg-blue-600  text-white font-bold py-4 min-w-screen px-6 rounded-3xl cursor-pointer  hover:bg-blue-700 hover:scale-105 transition-all duration-300 ease-in-out "
         >
           Search
         </button>
-          </form>
-            <MovieGrid movies={searchResults} />
+      </form>
+      <div>
+        <MovieGrid movies={searchResults} handleMovieClick={handleMovieClick} />
+      </div>
+      <Modal movies={selectedMovie} onClose={handleCloseModal} />
     </>
   );
 }
+
 export default SearchForm;
