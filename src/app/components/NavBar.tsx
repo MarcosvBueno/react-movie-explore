@@ -46,7 +46,7 @@ function NavBar() {
     {
       icon: <IoArrowForwardOutline size={isMobile ? "18" : "22"} />,
       text: "Upcoming",
-      href: "/upcoming",
+      href: "/upComing",
     },
   ];
 
