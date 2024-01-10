@@ -21,7 +21,6 @@ export default function RootLayout({
       <div className='w-full'>
       <NavBar />
       </div>
-      
     </html>
   )
 }

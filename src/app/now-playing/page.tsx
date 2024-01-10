@@ -5,13 +5,13 @@ import Modal from "../components/Modal";
 import { movieT } from "../types/types";
 import axios from "axios";
 
-function TopRated() {
+function NowPlaying() {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState<movieT | null >(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const searchUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+      const searchUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
       try {
         const response = await axios.get(searchUrl);
         setMovies(response.data.results);
@@ -35,7 +35,7 @@ function TopRated() {
   return (
     <div className="bg-gray-900 text-white min-h-screen">
       <main className="flex flex-col items-center justify-center min-h-screen py-2">
-        <h1 className="text-6xl font-bold m-3">Top Rated</h1>
+        <h1 className="text-6xl font-bold m-3">Now Playing</h1>
         <MovieGrid movies={movies} handleMovieClick={handleMovieClick} />
         {selectedMovie && (
           <Modal movies={selectedMovie} onClose={handleCloseModal} />
@@ -45,4 +45,4 @@ function TopRated() {
   );
 }
 
-export default TopRated;
+export default NowPlaying;
